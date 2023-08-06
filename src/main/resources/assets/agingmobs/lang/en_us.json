@@ -1,0 +1,9 @@
+{
+  "text.autoconfig.agingmobs.title": "Aging Mobs",
+    "text.autoconfig.agingmobs.option.mob_aging": "Aging Mobs",
+    "text.autoconfig.agingmobs.option.grow_hitbox": "Grow Hitbox",
+    "text.autoconfig.agingmobs.option.only": "Only",
+    "text.autoconfig.agingmobs.option.mob_aging.@Tooltip": "Whether Mobs should Visually Grow Up.",
+    "text.autoconfig.agingmobs.option.grow_hitbox.@Tooltip": "Whether when Mobs Visually grow up to also grow their Hitbox\n\nThis is off by default because growing the hitbox breaks\nsome vanilla farms that depend on mob height.",
+    "text.autoconfig.agingmobs.option.only.@Tooltip": "Which Mobs to allow to Visually Grow Up."
+}

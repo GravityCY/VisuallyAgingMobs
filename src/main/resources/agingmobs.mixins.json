@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.gravityio.agingmobs.mixin.impl",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "LivingEntityMixin",
+    "PassiveEntityMixin"
+  ],
+  "client": [
+    "client.AgingEntityMixins$LivingBabyGrowsMixin",
+    "client.AnimalModelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

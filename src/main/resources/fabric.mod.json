@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "agingmobs",
+  "version": "${version}",
+  "name": "VisuallyAgingMobs",
+  "description": "Baby Mobs visually age now!",
+  "authors": ["GravityIO"],
+  "contact": {
+    "repo": "https://github.com/harry/VisuallyAgingMobs"
+  },
+  "license": "MIT",
+  "icon": "assets/agingmobs/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.gravityio.agingmobs.client.VisuallyAgingMobsClient"
+    ],
+    "main": [
+      "me.gravityio.agingmobs.AgingMobsMod"
+    ],
+    "preLaunch": [
+      "me.gravityio.agingmobs.AgingMobsMod"
+    ],
+    "modmenu": [
+      "me.gravityio.agingmobs.compat.ModMenuApiImpl"
+    ]
+  },
+  "mixins": [
+    "agingmobs.mixins.json"
+  ],
+  "accessWidener": "agingmobs.accessWidener",
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
