@@ -17,6 +17,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Lets the client know the real breeding age of a mob.
+ */
 @Mixin(PassiveEntity.class)
 public abstract class PassiveEntityMixin extends PathAwareEntity {
     @Shadow protected int breedingAge;

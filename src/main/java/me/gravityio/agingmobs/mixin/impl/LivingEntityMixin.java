@@ -24,6 +24,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract boolean isBaby();
 
+    /**
+     * Makes the hitbox also scale using the entities age <br>
+     * Probably doesn't work with mobs that are not exactly half the size of the adult
+     */
     @Inject(method = "getScaleFactor", at = @At("RETURN"), cancellable = true)
     private void getGrowing(CallbackInfoReturnable<Float> cir) {
         LivingEntity self = (LivingEntity) (Object) this;

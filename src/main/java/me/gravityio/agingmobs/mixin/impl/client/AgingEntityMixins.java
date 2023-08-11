@@ -11,7 +11,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.util.math.MathHelper;
-import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -27,12 +26,15 @@ public class AgingEntityMixins {
         @Shadow
         protected M model;
         @Unique
-        private float maxShadow = -1;
+        private float baseShadow = -1;
 
         protected LivingBabyGrowsMixin(EntityRendererFactory.Context ctx) {
             super(ctx);
         }
 
+        /**
+         * Scales the whole MatrixStack of the model using it's age
+         */
         @Inject(
                 method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
                 at = @At(
@@ -41,23 +43,22 @@ public class AgingEntityMixins {
                         shift = At.Shift.AFTER)
         )
         private void scaleByAge(T entity, float f, float g, MatrixStack stack, VertexConsumerProvider v, int i, CallbackInfo ci) {
-            if (this.maxShadow == -1) this.maxShadow = this.shadowRadius;
-            if (this.shadowRadius != this.maxShadow) this.shadowRadius = this.maxShadow;
+            if (this.baseShadow == -1) this.baseShadow = this.shadowRadius;
+            if (this.shadowRadius != this.baseShadow) this.shadowRadius = this.baseShadow;
 
             if (ModConfig.INSTANCE.cantDo(AgeMobOnly.ANIMALS)
                     || !(entity instanceof PassiveEntity passiveEntity)
                     || !passiveEntity.isBaby()) return;
 
             var s = 1 - passiveEntity.getBreedingAge() / -24000f;
-            var data = MixinUtils.getModelData(this.model, this.maxShadow);
+            var data = MixinUtils.getModelData(this.model, this.baseShadow);
 
             var minModel = 1f;
             var maxModel = data.maxModel();
             var minShadow = data.minShadow();
-            var maxShadow = this.maxShadow * 2;
+            var maxShadow = this.baseShadow * 2;
 
             var t = MathHelper.lerp(s, minModel, maxModel);
-            TransitiveModelData.IDEK = new Matrix4f(stack.peek().getPositionMatrix());
             stack.scale(t, t, t);
             this.shadowRadius = MathHelper.lerp(s, minShadow, maxShadow);
             TransitiveModelData.AGE = passiveEntity.getBreedingAge();
